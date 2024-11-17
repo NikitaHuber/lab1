@@ -3,9 +3,6 @@ on:
   push:
     branches:
       - master
-  pull_request:
-    branches:
-      - master
 jobs:
   build:
     name: Autograding
@@ -16,6 +13,25 @@ jobs:
           fetch-depth: 0
 
       # TODO build, test and deploy project
+
+      - name: Prepare OpenJDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: "corretto"
+          java-version: "21"
+          cache: "gradle"
+
+      - name: Build project
+        uses: eskatos/gradle-command-action@v2
+        with:
+          arguments: clean build
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: jar
+          path: build/libs/*.jar
+          retention-days: 1
 
       - name: Run API Tests
         uses: matt-ball/newman-action@master
