@@ -3,6 +3,7 @@ package bmstu.nzagainov.person.controller
 import bmstu.nzagainov.person.model.PersonRequest
 import bmstu.nzagainov.person.services.PersonService
 import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder
 
@@ -17,15 +18,14 @@ class PersonController(private val personService: PersonService) {
     fun getPersons() = personService.getPersons()
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    fun addPerson(@RequestBody person: PersonRequest): String {
-        val id = personService.addPerson(person)
-        return ServletUriComponentsBuilder
-            .fromCurrentRequest()
-            .path("/{id}")
-            .buildAndExpand(id)
-            .toUri()
-            .toString()
+    fun addPerson(@RequestBody person: PersonRequest): ResponseEntity<Void> {
+        return ResponseEntity.created(
+            ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(personService.addPerson(person))
+                .toUri()
+        ).build()
     }
 
     @PatchMapping("/{id}")
