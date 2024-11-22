@@ -50,7 +50,7 @@ jobs:
 
       - name: Run containers
         timeout-minutes: 5
-        run: docker compose up -d --wait
+        run: docker compose up
 
       - name: Run API Tests
         uses: matt-ball/newman-action@master
