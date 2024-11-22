@@ -46,7 +46,7 @@ jobs:
 
       - name: Build images
         timeout-minutes: 10
-        run: docker compose build
+        run: docker build . -t nikitazagainov/webapp
 
       - name: Run containers
         timeout-minutes: 5
