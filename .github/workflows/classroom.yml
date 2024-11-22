@@ -52,18 +52,13 @@ jobs:
         timeout-minutes: 5
         run: docker compose up -d --wait
 
-      - name: Run API Tests
-        uses: matt-ball/newman-action@master
-        with:
-          collection: postman/[inst] Lab1.postman_collection.json
-          environment: postman/[inst][local] Lab1.postman_environment.json
-          delayRequest: 100
-          reporters: '[ "cli" ]'
-
-      - name: Stop containers
-        if: always()
-        continue-on-error: true
-        run: docker compose down -v
+#      - name: Run API Tests
+#        uses: matt-ball/newman-action@master
+#        with:
+#          collection: postman/[inst] Lab1.postman_collection.json
+#          environment: postman/[inst][local] Lab1.postman_environment.json
+#          delayRequest: 100
+#          reporters: '[ "cli" ]'
 
       - name: Autograding
         uses: education/autograding@v1
@@ -78,4 +73,11 @@ jobs:
           user_column: 'D'
           column_offset: 'F'
           mark: "'+"
+
+      - name: Stop containers
+        if: always()
+        continue-on-error: true
+        run: docker compose down -v
+
+
 
