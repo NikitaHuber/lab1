@@ -20,7 +20,7 @@ services:
       - "5432:5432"
 
   person:
-    build: .
+    image: nikitazagainov/webapp
     container_name: person-service
     ports:
       - "8080:8080"
