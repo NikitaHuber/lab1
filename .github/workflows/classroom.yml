@@ -52,17 +52,17 @@ jobs:
         timeout-minutes: 5
         run: docker compose up -d --wait
 
-#      - name: Run API Tests
-#        uses: matt-ball/newman-action@master
-#        with:
-#          collection: postman/[inst] Lab1.postman_collection.json
-#          environment: postman/[inst][local] Lab1.postman_environment.json
-#          delayRequest: 100
-#          reporters: '[ "cli" ]'
+      - name: Run API Tests
+        uses: matt-ball/newman-action@master
+        with:
+          collection: postman/[inst] Lab1.postman_collection.json
+          environment: postman/[inst][local] Lab1.postman_environment.json
+          delayRequest: 100
+          reporters: '[ "cli" ]'
 
-      - name: Autograding
-        uses: education/autograding@v1
-        continue-on-error: true
+#      - name: Autograding
+#        uses: education/autograding@v1
+#        continue-on-error: true
 
       - name: Github auto grader mark
         uses: Romanow/google-sheet-autograder-marker@v1.0
