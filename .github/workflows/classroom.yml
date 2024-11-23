@@ -24,7 +24,7 @@ jobs:
       - name: Build project
         uses: eskatos/gradle-command-action@v2
         with:
-          arguments: clean bootJar
+          arguments: clean build
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
