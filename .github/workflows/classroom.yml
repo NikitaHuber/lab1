@@ -37,7 +37,7 @@ jobs:
         uses: mikepenz/action-junit-report@v4
         if: always()
         with:
-          report_paths: '**/build/test-results/test/binary/TEST-*.xml'
+          report_paths: '**/build/test-results/test/TEST-*.xml'
   test:
     name: Integration tests
     runs-on: ubuntu-latest
