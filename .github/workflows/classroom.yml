@@ -60,10 +60,6 @@ jobs:
           delayRequest: 100
           reporters: '[ "cli" ]'
 
-      - name: Autograding
-        uses: education/autograding@v1
-        continue-on-error: true
-
       - name: Stop containers
         if: always()
         continue-on-error: true
@@ -95,7 +91,12 @@ jobs:
 
       - name: Start application
         run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "docker compose down; docker load -i webapp.tar; docker compose up -d"
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "docker compose down; docker load -i webapp.tar; docker compose up -d --wait"
+
+      - name: Autograding
+        uses: education/autograding@v1
+        continue-on-error: true
+
       - name: Cleanup
         run: rm -rf ~/.ssh
 
