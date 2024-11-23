@@ -60,6 +60,10 @@ jobs:
           delayRequest: 100
           reporters: '[ "cli" ]'
 
+      - name: Autograding
+        uses: education/autograding@v1
+        continue-on-error: true
+
       - name: Stop containers
         if: always()
         continue-on-error: true
